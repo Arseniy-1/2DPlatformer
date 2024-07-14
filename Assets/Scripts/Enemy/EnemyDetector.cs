@@ -13,8 +13,8 @@ public class EnemyDetector : MonoBehaviour
             if(player == _detectedPlayer)
                 return;
 
-            OnEnemyDetected?.Invoke(player);
             _detectedPlayer = player;
+            OnEnemyDetected?.Invoke(player);
         }
     }
 }
