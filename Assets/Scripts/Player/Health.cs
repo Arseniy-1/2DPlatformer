@@ -5,13 +5,12 @@ public class Health : MonoBehaviour
 {
     public event Action HealthChanged;
 
-    [SerializeField] private int _maxHealth;
-
-    public int CurrentHealthPoint { get; private set; }
+    [field: SerializeField] public float MaxHealth { get; private set; }
+    [field: SerializeField] public float CurrentHealthPoint { get; private set; }
 
     private void Awake()
     {
-        CurrentHealthPoint = _maxHealth;
+        CurrentHealthPoint = MaxHealth;
     }
 
     public void Heal(int amount)
@@ -19,9 +18,9 @@ public class Health : MonoBehaviour
         if (amount <= 0)
             return;
 
-        if (CurrentHealthPoint + amount <= _maxHealth)
+        if (CurrentHealthPoint + amount >= MaxHealth)
         {
-            CurrentHealthPoint = _maxHealth;
+            CurrentHealthPoint = MaxHealth;
             HealthChanged?.Invoke();
             return;
         }

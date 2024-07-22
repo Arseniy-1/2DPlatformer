@@ -15,8 +15,9 @@ public class PlayerMover : MonoBehaviour
     private string _jumpButton = "Jump";
     private string _runningTrigger = "IsRunning";
 
-    private bool _isGrounded => Physics2D.Raycast(_groundPoint.position, Vector2.down, 0.03f, _groundLayer);
     private bool _facingRight = true;
+
+    private bool IsGrounded => Physics2D.Raycast(_groundPoint.position, Vector2.down, 0.03f, _groundLayer);
 
     private void Start()
     {
@@ -32,7 +33,7 @@ public class PlayerMover : MonoBehaviour
         _animator.SetBool(_runningTrigger, currentHorizontalSpeed != 0);
 
 
-        if (Input.GetButtonDown(_jumpButton) && _isGrounded)
+        if (Input.GetButtonDown(_jumpButton) && IsGrounded)
             _rigidbody.AddForce(new Vector2(0, _jumpForce));
 
         CorrectFlip();

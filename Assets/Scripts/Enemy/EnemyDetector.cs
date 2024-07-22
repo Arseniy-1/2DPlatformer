@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class EnemyDetector : MonoBehaviour
 {
-    public event Action<Player> OnEnemyDetected;
     private Player _detectedPlayer;
+
+    public event Action<Player> OnEnemyDetected;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
