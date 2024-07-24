@@ -3,14 +3,16 @@ using System;
 
 public class Health : MonoBehaviour
 {
-    public event Action HealthChanged;
+    [SerializeField] private float _maxHealth;
+    [SerializeField] private float _currentHealthPoint;
 
-    [field: SerializeField] public float MaxHealth { get; private set; }
-    [field: SerializeField] public float CurrentHealthPoint { get; private set; }
+    public event Action<float, float> HealthChanged;
+    public event Action Died;
+
 
     private void Awake()
     {
-        CurrentHealthPoint = MaxHealth;
+        _currentHealthPoint = _maxHealth;
     }
 
     public void Heal(int amount)
@@ -18,15 +20,9 @@ public class Health : MonoBehaviour
         if (amount <= 0)
             return;
 
-        if (CurrentHealthPoint + amount >= MaxHealth)
-        {
-            CurrentHealthPoint = MaxHealth;
-            HealthChanged?.Invoke();
-            return;
-        }
+        _currentHealthPoint = Mathf.Clamp(_currentHealthPoint + amount, 0, _maxHealth);
 
-        CurrentHealthPoint += amount;
-        HealthChanged?.Invoke();
+        HealthChanged?.Invoke(_currentHealthPoint, _maxHealth);
     }
 
     public void TakeDamage(int amount)
@@ -34,14 +30,11 @@ public class Health : MonoBehaviour
         if (amount <= 0)
             return;
 
-        CurrentHealthPoint -= amount;
+        _currentHealthPoint = Mathf.Clamp(_currentHealthPoint - amount, 0, _maxHealth);
+        
+        if (_currentHealthPoint == 0)
+            Died.Invoke();
 
-        if (CurrentHealthPoint <= 0)
-        {
-            Destroy(gameObject);
-            CurrentHealthPoint = 0;
-        }
-
-        HealthChanged?.Invoke();
+        HealthChanged?.Invoke(_currentHealthPoint, _maxHealth);
     }
 }

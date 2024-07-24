@@ -3,11 +3,10 @@ using UnityEngine.UI;
 
 public class HealthBar : HealthView
 {
-    [SerializeField] protected Slider _healthBar;
+    [SerializeField] protected Slider HealthBarView;
 
-    protected override void ShowHealth()
+    protected override void ShowHealth(float currentHealth, float maxHealth)
     {
-        _healthBar.value = _health.CurrentHealthPoint / _health.MaxHealth;
+        HealthBarView.value = currentHealth / maxHealth;
     }
-
 }

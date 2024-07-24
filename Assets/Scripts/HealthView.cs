@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class HealthView : MonoBehaviour
 {
-    [SerializeField] protected Health _health;
+    [SerializeField] private Health _health;
 
     private void OnEnable()
     {
@@ -14,5 +14,5 @@ public abstract class HealthView : MonoBehaviour
         _health.HealthChanged -= ShowHealth;
     }
 
-    protected abstract void ShowHealth();
+    protected abstract void ShowHealth(float currentHealth, float maxHealth);
 }

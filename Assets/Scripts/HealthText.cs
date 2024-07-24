@@ -1,15 +1,12 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HealthText : HealthView
 {
     [SerializeField] private TextMeshProUGUI _healthView;
 
-    protected override void ShowHealth()
+    protected override void ShowHealth(float currentHealth, float maxHealth)
     {
-        float amount = _health.CurrentHealthPoint;
-        _healthView.text = amount.ToString();
+        _healthView.text = currentHealth.ToString();
     }
 }

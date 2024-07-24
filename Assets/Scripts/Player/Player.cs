@@ -15,11 +15,13 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+        _heath.Died += MakeDeath;
         _collisionHandler.Triggered += OnTriggered;
     }
 
     private void OnDisable()
     {
+        _heath.Died -= MakeDeath;
         _collisionHandler.Triggered -= OnTriggered;
     }
 
@@ -53,5 +55,10 @@ public class Player : MonoBehaviour
     private void PickUp(Heal heal)
     {
         _heath.Heal(heal.HealAmount);
+    }
+
+    private void MakeDeath()
+    {
+        Destroy(gameObject);
     }
 }
