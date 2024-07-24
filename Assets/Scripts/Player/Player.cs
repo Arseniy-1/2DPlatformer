@@ -49,7 +49,6 @@ public class Player : MonoBehaviour
         else if (collision.TryGetComponent(out ExitZone exitZone))
         {
             Destroy(gameObject);
-            Debug.Log("Игра окончена");
         }
     }
 

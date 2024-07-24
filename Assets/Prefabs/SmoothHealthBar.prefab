@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 0}
-  _healthBar: {fileID: 649523535103724876}
+  HealthBarView: {fileID: 649523535103724876}
   _smoothDecreaseDuration: 0.35
 --- !u!1 &8454442026228818867
 GameObject:

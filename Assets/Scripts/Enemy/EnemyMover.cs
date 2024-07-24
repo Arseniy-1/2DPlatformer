@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class EnemyMover : MonoBehaviour
+public class EnemyMover : Mover
 {
     [SerializeField] private EnemyDetector _enemyDetector;
     [SerializeField] private List<Transform> _waypoints;
@@ -10,8 +11,6 @@ public class EnemyMover : MonoBehaviour
     private int _currentWaypointIndex = 0;
     private bool _haveDetectedEnemy = false;
     private Player _player;
-
-    private bool _facingRight = false;
 
     private void OnEnable()
     {
@@ -29,12 +28,11 @@ public class EnemyMover : MonoBehaviour
             ChaseEnemy();
         else
             WaypointMove();
-
-        CorrectFlipStatus();
     }
 
     private void Move(Transform targetPosition)
     {
+        HorizontalDirection = targetPosition.position.x - transform.position.x;
         transform.position = Vector3.MoveTowards(transform.position, targetPosition.position, _speed * Time.deltaTime);
     }
 
@@ -61,28 +59,5 @@ public class EnemyMover : MonoBehaviour
     {
         _player = player;
         _haveDetectedEnemy = true;
-    }
-
-    private void Flip()
-    {
-        _facingRight = !_facingRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
-    }
-
-    private void CorrectFlipStatus()
-    {
-        Transform currentTarget;
-
-        if (_haveDetectedEnemy)
-            currentTarget = _player.transform;
-        else
-            currentTarget = _waypoints[_currentWaypointIndex];
-
-        if (!_facingRight && currentTarget.position.x > transform.position.x)
-            Flip();
-        else if (_facingRight && currentTarget.position.x < transform.position.x)
-            Flip();
     }
 }

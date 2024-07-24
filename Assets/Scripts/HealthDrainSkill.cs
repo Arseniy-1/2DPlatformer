@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class HealthDrainSkill : MonoBehaviour
 {
@@ -22,6 +21,7 @@ public class HealthDrainSkill : MonoBehaviour
     {
         if (_isReady)
         {
+            StopAllCoroutines();
             StartCoroutine(HealthDraining());
         }
     }
@@ -45,7 +45,7 @@ public class HealthDrainSkill : MonoBehaviour
         _isWorking = false;
         WaitForSeconds delay = new WaitForSeconds(_drainIterationDelay);
 
-        while (_currentWorkTime <= _workTime)
+        while (_currentWorkTime < _workTime)
         {
             Drain();
             _currentWorkTime += _drainIterationDelay;
@@ -54,6 +54,9 @@ public class HealthDrainSkill : MonoBehaviour
         }
 
         _isWorking = true;
+        _isReady = false;
+        _currentWorkTime = 0;
+        _currentCoolDownTime = 0;
     }
 
     private void Drain()
