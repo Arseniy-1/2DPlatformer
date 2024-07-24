@@ -7,6 +7,6 @@ public class HealthText : HealthView
 
     protected override void ShowHealth(float currentHealth, float maxHealth)
     {
-        _healthView.text = currentHealth.ToString();
+        _healthView.text = Mathf.Round(currentHealth).ToString();
     }
 }

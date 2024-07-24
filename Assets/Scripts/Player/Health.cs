@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
         _currentHealthPoint = _maxHealth;
     }
 
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
         if (amount <= 0)
             return;
@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
         HealthChanged?.Invoke(_currentHealthPoint, _maxHealth);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (amount <= 0)
             return;

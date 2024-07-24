@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 health.TakeDamage(Damage);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         Health.TakeDamage(amount);
     }

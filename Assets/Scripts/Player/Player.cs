@@ -10,8 +10,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Wallet _wallet;
     [SerializeField] private Health _heath;
     [SerializeField] private PlayerAttacker _playerAttacker;
+    [SerializeField] private HealthDrainSkill _playerDrainSkill;
 
     private KeyCode _attackButton = KeyCode.E;
+    private KeyCode _skillButton = KeyCode.F;
 
     private void OnEnable()
     {
@@ -30,6 +32,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(_attackButton))
         {
             _playerAttacker.Attack();
+        }
+        else if (Input.GetKeyDown(_skillButton))
+        {
+            _playerDrainSkill.Activate();
         }
     }
 
