@@ -19,12 +19,13 @@ public class SmoothHealthBar : HealthBar
     {
         float elapsedTime = 0f;
         float previousValue = HealthBarView.value;
+        float targetValue = currentHealth / maxHealth;
 
         while (elapsedTime < _smoothDecreaseDuration)
         {
             elapsedTime += Time.deltaTime;
             float normalizedPosition = elapsedTime / _smoothDecreaseDuration;
-            float intermediateValue = Mathf.Lerp(previousValue, currentHealth / maxHealth, normalizedPosition);
+            float intermediateValue = Mathf.Lerp(previousValue, targetValue, normalizedPosition);
 
             HealthBarView.value = intermediateValue;
 

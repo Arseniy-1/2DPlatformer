@@ -15,8 +15,6 @@ public class PlayerMover : Mover
     private string _jumpButton = "Jump";
     private string _runningTrigger = "IsRunning";
     
-    public event Action OnFlipped;
-
     private bool IsGrounded => Physics2D.Raycast(_groundPoint.position, Vector2.down, 0.03f, _groundLayer);
 
     private void Start()

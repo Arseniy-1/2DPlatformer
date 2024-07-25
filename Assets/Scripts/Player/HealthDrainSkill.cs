@@ -11,6 +11,7 @@ public class HealthDrainSkill : MonoBehaviour
     [SerializeField] private float _coolDown;
     [SerializeField] private Slider _skillSlider;
     [SerializeField] private Health _health;
+    [SerializeField] private GameObject _radiusView;
 
     private float _currentCoolDownTime = 0;
     private float _currentWorkTime = 0;
@@ -42,6 +43,7 @@ public class HealthDrainSkill : MonoBehaviour
 
     private IEnumerator HealthDraining()
     {
+        _radiusView.SetActive(true);
         _isWorking = false;
         WaitForSeconds delay = new WaitForSeconds(_drainIterationDelay);
 
@@ -57,6 +59,7 @@ public class HealthDrainSkill : MonoBehaviour
         _isReady = false;
         _currentWorkTime = 0;
         _currentCoolDownTime = 0;
+        _radiusView.SetActive(false);
     }
 
     private void Drain()
