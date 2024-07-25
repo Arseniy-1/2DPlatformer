@@ -3,7 +3,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] protected int Damage;
-    [SerializeField] protected HealthView HealthView;
     [SerializeField] protected Health Health;
 
     private void OnEnable()

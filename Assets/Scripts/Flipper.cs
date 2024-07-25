@@ -22,8 +22,8 @@ public class Flipper : MonoBehaviour
     private void Flip()
     {
         _facingRight = !_facingRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
+        Vector3 scaler = transform.localScale;
+        scaler.x *= -1;
+        transform.localScale = scaler;
     }
 }
