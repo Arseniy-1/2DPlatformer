@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 401715666414489007}
   - component: {fileID: 2682064008365929060}
   - component: {fileID: 1898115182318597983}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eagle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
-  HealthView: {fileID: 7000357927955991731}
   Health: {fileID: 1898115182318597983}
 --- !u!114 &1898115182318597983
 MonoBehaviour:
@@ -96,7 +95,7 @@ GameObject:
   - component: {fileID: 8538026631961821171}
   - component: {fileID: 4907035873379783884}
   - component: {fileID: 4068827112861267489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Drawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,20 +235,24 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.06, y: 0.16499999}
-      - {x: 0.02, y: 0.145}
-      - {x: -0.06, y: 0.16499999}
-      - {x: -0.099999994, y: 0.16499999}
-      - {x: -0.16, y: 0.095}
-      - {x: -0.19, y: -0.044999998}
-      - {x: -0.19, y: -0.114999995}
-      - {x: -0.17999999, y: -0.125}
-      - {x: -0.099999994, y: -0.195}
-      - {x: 0.049999997, y: -0.195}
-      - {x: 0.12, y: -0.175}
-      - {x: 0.19999999, y: -0.024999999}
-      - {x: 0.19999999, y: 0.105}
-      - {x: 0.17, y: 0.16499999}
+    - - {x: 0.08874184, y: 0.14143172}
+      - {x: 0.02, y: 0.08981572}
+      - {x: -0.06878827, y: 0.13235773}
+      - {x: -0.10125543, y: 0.13235775}
+      - {x: -0.14493442, y: 0.06989058}
+      - {x: -0.09097752, y: 0.024221582}
+      - {x: -0.15113617, y: -0.017538581}
+      - {x: -0.17030519, y: -0.08976527}
+      - {x: -0.10090035, y: -0.08868754}
+      - {x: -0.054338634, y: -0.17248362}
+      - {x: -0.011572987, y: -0.16868754}
+      - {x: -0.0037849778, y: -0.11020831}
+      - {x: 0.07704958, y: -0.115097776}
+      - {x: 0.10173532, y: -0.08980498}
+      - {x: 0.05101966, y: -0.023243248}
+      - {x: 0.18447942, y: 0.056051914}
+      - {x: 0.16033627, y: 0.11534705}
+      - {x: 0.12688728, y: 0.14890458}
   m_UseDelaunayMesh: 0
 --- !u!114 &4907035873379783884
 MonoBehaviour:
@@ -277,7 +280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
-  HealthView: {fileID: 7000357927955991731}
   Health: {fileID: 1898115182318597983}
 --- !u!1 &2366004285219705145
 GameObject:
@@ -288,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8559593869438931274}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyEagle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4146164066023148077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7712749378462499356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WayPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +390,7 @@ GameObject:
   - component: {fileID: 451781250426201662}
   - component: {fileID: 6847814692816396570}
   - component: {fileID: 2525292513667007072}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +492,7 @@ GameObject:
   - component: {fileID: 7682628324940183347}
   - component: {fileID: 538557002082248366}
   - component: {fileID: 3681406387140683339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3843216242466923483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WayPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,6 +665,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2460599838684524131}
     m_Modifications:
+    - target: {fileID: 1456125654322975394, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072132013428266604, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2258379895434844816, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -675,9 +685,21 @@ PrefabInstance:
       propertyPath: _health
       value: 
       objectReference: {fileID: 1898115182318597983}
+    - target: {fileID: 5500629865173735917, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5875131508551597115, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6617120719275678377, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
       propertyPath: m_Name
       value: SmoothHealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617120719275678377, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8225939641794529531, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
       propertyPath: m_Pivot.x
@@ -775,6 +797,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8454442026228818867, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707989166854649785, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -785,14 +815,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8225939641794529531, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
   m_PrefabInstance: {fileID: 2726081538715344301}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7000357927955991731 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4968236496861057310, guid: 4b85901368199cc428afaa2e30cda288, type: 3}
-  m_PrefabInstance: {fileID: 2726081538715344301}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a947d9ce7a4aaf468e773df35ddf942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

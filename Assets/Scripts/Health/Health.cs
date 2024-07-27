@@ -9,7 +9,6 @@ public class Health : MonoBehaviour
     public event Action<float, float> HealthChanged;
     public event Action Died;
 
-
     private void Awake()
     {
         _currentHealthPoint = _maxHealth;
@@ -25,10 +24,10 @@ public class Health : MonoBehaviour
         HealthChanged?.Invoke(_currentHealthPoint, _maxHealth);
     }
 
-    public void TakeDamage(float amount)
+    public float TakeDamage(float amount)
     {
         if (amount <= 0)
-            return;
+            return 0;
 
         _currentHealthPoint = Mathf.Clamp(_currentHealthPoint - amount, 0, _maxHealth);
         
@@ -36,5 +35,6 @@ public class Health : MonoBehaviour
             Died.Invoke();
 
         HealthChanged?.Invoke(_currentHealthPoint, _maxHealth);
+        return amount;
     }
 }

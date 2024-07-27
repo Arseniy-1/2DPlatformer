@@ -9,12 +9,13 @@ public class PlayerMover : Mover
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Health _health;
 
+    private float _rayDistance = 0.1f;
     private Rigidbody2D _rigidbody;
     private string _horizontalAxis = "Horizontal";
     private string _jumpButton = "Jump";
     private string _runningTrigger = "IsRunning";
     
-    private bool IsGrounded => Physics2D.Raycast(_groundPoint.position, Vector2.down, 0.03f, _groundLayer);
+    private bool IsGrounded => Physics2D.Raycast(_groundPoint.position, Vector2.down, _rayDistance, _groundLayer);
 
     private void Start()
     {

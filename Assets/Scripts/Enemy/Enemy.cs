@@ -22,9 +22,9 @@ public class Enemy : MonoBehaviour, IDamageable
                 health.TakeDamage(Damage);
     }
 
-    public void TakeDamage(float amount)
+    public float TakeDamage(float amount)
     {
-        Health.TakeDamage(amount);
+        return Health.TakeDamage(amount);
     }
 
     private void MakeDeath()

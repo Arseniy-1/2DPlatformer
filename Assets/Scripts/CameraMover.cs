@@ -7,9 +7,7 @@ public class CameraMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_player == null)
-            _player = FindObjectOfType<Player>();
-        else
+        if (_player != null)
             transform.position = Vector3.Lerp(transform.position, new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z), _stiffness);
     }
 }
