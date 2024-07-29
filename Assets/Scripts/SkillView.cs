@@ -5,83 +5,85 @@ using UnityEngine.UI;
 public class SkillView : MonoBehaviour
 {
     [SerializeField] private Slider _skillSlider;
-    [SerializeField] private RadiusView _radiusView;
     [SerializeField] private SpriteRenderer _radiusSpriteRenderer;
+    [SerializeField] private HealthDrainSkill _healthDrainSkill;
 
     private float _minAlpha = 0;
     private float _maxAlpha = 0.5f;
     private float _currentAlpha = 0;
     private float _displayDelay = 0.05f;
 
-    public void SetSliderValue(float amount)
+    private WaitForSeconds _coroutineDisplayDelay;
+
+    private void OnEnable()
     {
-        _skillSlider.value = amount;
+        _healthDrainSkill.Activated += ShowActivatedBar;
     }
 
-    public void ShowRadius()
+    private void OnDisable()
     {
-        StartCoroutine(SmoothShowRadius(_maxAlpha));
+        _healthDrainSkill.Activated -= ShowActivatedBar;
     }
 
-    public void HideRadius()
+    private void Awake()
     {
-        StartCoroutine(SmoothHideRadius(_minAlpha));
+        _coroutineDisplayDelay = new WaitForSeconds(_displayDelay);
     }
 
-    public void ReduceSkillBar(float workTime)
+    private void Start()
     {
-        StartCoroutine(SmoothReducingSkillBar(workTime));
+        StartCoroutine(SmoothShowingSkillBar());
     }
 
-    public void ShowSkillBar(float workTime)
+    public void ShowActivatedBar()
     {
-        StartCoroutine(SmoothShowSkillBar(workTime));
+        StartCoroutine(SmoothShowRadius());
+        StartCoroutine(SmoothHidingSkillBar());
     }
 
-    private IEnumerator SmoothShowRadius(float targetAlpha)
+    private IEnumerator SmoothShowRadius()
     {
         float alphaAmount = 0.1f;
 
-        while (_currentAlpha <= targetAlpha)
+        while (_currentAlpha <= _maxAlpha)
         {
             _currentAlpha += alphaAmount;
             _radiusSpriteRenderer.color = new Color(_radiusSpriteRenderer.color.r, _radiusSpriteRenderer.color.g, _radiusSpriteRenderer.color.b, _currentAlpha);
-            yield return new WaitForSeconds(_displayDelay);
+            yield return _coroutineDisplayDelay;
         }
-    }
 
-    private IEnumerator SmoothHideRadius(float targetAlpha)
-    {
-        float alphaAmount = -0.1f;
+        yield return new WaitForSeconds(_healthDrainSkill.WorkTime);
 
-        while (_currentAlpha >= targetAlpha)
+        while (_currentAlpha >= _minAlpha)
         {
-            _currentAlpha += alphaAmount;
+            _currentAlpha -= alphaAmount;
             _radiusSpriteRenderer.color = new Color(_radiusSpriteRenderer.color.r, _radiusSpriteRenderer.color.g, _radiusSpriteRenderer.color.b, _currentAlpha);
-            yield return new WaitForSeconds(_displayDelay);
+            yield return _coroutineDisplayDelay;
         }
     }
 
-    private IEnumerator SmoothReducingSkillBar(float time)
+    private IEnumerator SmoothHidingSkillBar()
     {
         float sliderMaxValue = 1;
         float sliderMinValue = 0.01f;
 
         while (_skillSlider.value > sliderMinValue)
         {
-            _skillSlider.value -= sliderMaxValue / (time / _displayDelay);
-            yield return new WaitForSeconds(_displayDelay);
+            _skillSlider.value -= sliderMaxValue / (_healthDrainSkill.WorkTime / _displayDelay);
+            yield return _coroutineDisplayDelay;
         }
+
+        StartCoroutine(SmoothShowingSkillBar());
     }
 
-    private IEnumerator SmoothShowSkillBar(float time)
+    private IEnumerator SmoothShowingSkillBar()
     {
         float sliderMaxValue = 1;
 
         while (_skillSlider.value < sliderMaxValue)
         {
-            _skillSlider.value += sliderMaxValue / (time / _displayDelay);
-            yield return new WaitForSeconds(_displayDelay);
+            _skillSlider.value += sliderMaxValue / (_healthDrainSkill.CoolDown / _displayDelay);
+            yield return _coroutineDisplayDelay;
         }
     }
 }

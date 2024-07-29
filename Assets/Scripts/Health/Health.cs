@@ -20,6 +20,7 @@ public class Health : MonoBehaviour
             return;
 
         _currentHealthPoint = Mathf.Clamp(_currentHealthPoint + amount, 0, _maxHealth);
+        Debug.Log("HealIteration");
 
         HealthChanged?.Invoke(_currentHealthPoint, _maxHealth);
     }
@@ -30,11 +31,15 @@ public class Health : MonoBehaviour
             return 0;
 
         _currentHealthPoint = Mathf.Clamp(_currentHealthPoint - amount, 0, _maxHealth);
-        
+
         if (_currentHealthPoint == 0)
             Died.Invoke();
 
         HealthChanged?.Invoke(_currentHealthPoint, _maxHealth);
-        return amount;
+
+        if (_currentHealthPoint < amount)
+            return _currentHealthPoint;
+        else
+            return amount;
     }
 }

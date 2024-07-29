@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,17 +7,18 @@ public class HealthDrainSkill : MonoBehaviour
     [SerializeField] private float _radius;
     [SerializeField] private float _healthPerIteration;
     [SerializeField] private float _drainIterationDelay;
-    [SerializeField] private float _workTime;
-    [SerializeField] private float _coolDown;
-    [SerializeField] private SkillView _skillView;
     [SerializeField] private Health _health;
     [SerializeField] private LayerMask _enemyLayerMask;
 
-    private float _currentCoolDownTime = 0;
     private float _currentWorkTime = 0;
    
     private bool _isReady = false;
     private bool _isWorking = false;
+
+    public event Action Activated;
+
+    [field: SerializeField] public float CoolDown { get; private set; }
+    [field: SerializeField] public float WorkTime { get; private set; }
 
     private void Start()
     {
@@ -31,28 +33,18 @@ public class HealthDrainSkill : MonoBehaviour
 
     private IEnumerator SkillRecharging()
     {
-        int oneSecondAmount = 1;
-        _skillView.ShowSkillBar(_coolDown);
-
-        while(_currentCoolDownTime < _coolDown)
-        {
-            _currentCoolDownTime += 1;
-            yield return new WaitForSeconds(oneSecondAmount);
-        }
-
+        yield return new WaitForSeconds(CoolDown);
         _isReady = true;
     }
 
     private IEnumerator HealthDraining()
     {
         _isWorking = true;
-
-        _skillView.ShowRadius();
-        _skillView.ReduceSkillBar(_workTime);
+        Activated?.Invoke();
 
         WaitForSeconds delay = new WaitForSeconds(_drainIterationDelay);
 
-        while (_currentWorkTime < _workTime)
+        while (_currentWorkTime < WorkTime)
         {
             Drain();
             _currentWorkTime += _drainIterationDelay;
@@ -62,8 +54,6 @@ public class HealthDrainSkill : MonoBehaviour
         _isWorking = false;
         _isReady = false;
         _currentWorkTime = 0;
-        _currentCoolDownTime = 0;
-        _skillView.HideRadius();
 
         StartCoroutine(SkillRecharging());
     }
@@ -76,8 +66,8 @@ public class HealthDrainSkill : MonoBehaviour
         {
             if (hit.TryGetComponent(out Enemy enemy))
             {
-                enemy.TakeDamage(_healthPerIteration);
                 _health.Heal(enemy.TakeDamage(_healthPerIteration));
+                break;
             }
         }
     }
