@@ -10,15 +10,23 @@ public class HealthDrainSkill : MonoBehaviour
     [SerializeField] private Health _health;
     [SerializeField] private LayerMask _enemyLayerMask;
 
+    [SerializeField, Range(4, 10)] private float _coolDown;
+    [SerializeField, Range(0, 3)] private float _workTime;
+
     private float _currentWorkTime = 0;
-   
-    private bool _isReady = false;
-    private bool _isWorking = false;
 
-    public event Action Activated;
+    private bool _isReadyToActivate = false;
 
-    [field: SerializeField] public float CoolDown { get; private set; }
-    [field: SerializeField] public float WorkTime { get; private set; }
+    private WaitForSeconds _coroutineDelay;
+
+    public event Action<float> OnValueChanged;
+    public event Action OnDiactivate;
+    public event Action OnActivate;
+
+    private void Awake()
+    {
+        _coroutineDelay = new WaitForSeconds(_drainIterationDelay);
+    }
 
     private void Start()
     {
@@ -27,33 +35,40 @@ public class HealthDrainSkill : MonoBehaviour
 
     public void Activate()
     {
-        if (_isReady && _isWorking == false)
+        if (_isReadyToActivate == true)
             StartCoroutine(HealthDraining());
     }
 
     private IEnumerator SkillRecharging()
     {
-        yield return new WaitForSeconds(CoolDown);
-        _isReady = true;
+        _currentWorkTime = 0;
+
+        while (_currentWorkTime < _coolDown)
+        {
+            _currentWorkTime += _drainIterationDelay;
+            OnValueChanged?.Invoke(_currentWorkTime / _coolDown);
+            yield return _coroutineDelay;
+        }
+
+        _isReadyToActivate = true;
     }
 
     private IEnumerator HealthDraining()
     {
-        _isWorking = true;
-        Activated?.Invoke();
+        _isReadyToActivate = false;
+        OnActivate?.Invoke();
 
-        WaitForSeconds delay = new WaitForSeconds(_drainIterationDelay);
+        _currentWorkTime = _workTime;
 
-        while (_currentWorkTime < WorkTime)
+        while (_currentWorkTime > 0)
         {
             Drain();
-            _currentWorkTime += _drainIterationDelay;
-            yield return delay;
+            _currentWorkTime -= _drainIterationDelay;
+            OnValueChanged?.Invoke(_currentWorkTime / _workTime);
+            yield return _coroutineDelay;
         }
 
-        _isWorking = false;
-        _isReady = false;
-        _currentWorkTime = 0;
+        OnDiactivate?.Invoke();
 
         StartCoroutine(SkillRecharging());
     }

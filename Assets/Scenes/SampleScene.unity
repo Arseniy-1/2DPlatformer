@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 6095408}
   - component: {fileID: 6095407}
   - component: {fileID: 6095409}
+  - component: {fileID: 6095410}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -432,8 +433,8 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  <CoolDown>k__BackingField: 6
-  <WorkTime>k__BackingField: 3
+  _coolDown: 6
+  _workTime: 3
 --- !u!114 &6095408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,9 +460,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db5b77e3a24b9d459db684cc35eef79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthDrainSkill: {fileID: 6095407}
   _skillSlider: {fileID: 120897221}
+--- !u!114 &6095410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e58e0d8b3bfdb4e8a9c165ba40678a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthDrainSkill: {fileID: 6095407}
   _radiusSpriteRenderer: {fileID: 167937262}
-  _healthDrainSkill: {fileID: 6095407}
 --- !u!1001 &20290024
 PrefabInstance:
   m_ObjectHideFlags: 0
